@@ -2,13 +2,11 @@ const mytoken = '123'; //可以随便取  获取节点，/?token=123 or /123
 
 //自建节点,没有留空
 const MainData = `
-//vless://xxx
-//vmess://xxx
 `
 
 //订阅url，可多个，也可为0
 const urls = [
-	//'https://allsub.king361.cf',
+	'https://allsub.king361.cf',
         //'https://sss.com'
 	// 添加更多订阅,支持base64
 ];
@@ -46,8 +44,9 @@ export default {
 
 		const targets = ['clash', 'sing-box', 'singbox'];
 		for (const target of targets) {
-			if (userAgent.includes(target)) {
-				const subconverterUrl = `https://${subconverter}/sub?target=${target}&url=${encodeURIComponent(request.url)}&insert=false&config=${encodeURIComponent(subconfig)}&emoji=true&list=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true`;
+      if (userAgent.includes('clash') || userAgent.includes('sing-box') || userAgent.includes('singbox') || userAgent.includes('Shadowrocket') || userAgent.includes('Quantumult')) {
+        const target = userAgent.includes('clash') || userAgent.includes('Shadowrocket') || userAgent.includes('Quantumult') ? 'clash' : 'singbox';
+        const subconverterUrl = `https://${subconverter}/sub?target=${target}&url=${encodeURIComponent(request.url)}&insert=false&config=${encodeURIComponent(subconfig)}&emoji=true&list=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true`;
 
 				try {
 					const subconverterResponse = await fetch(subconverterUrl);
